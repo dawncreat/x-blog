@@ -1,0 +1,4 @@
+SQLAlchemy!=1.1.5,!=1.1.6,!=1.1.7,!=1.1.8,>=1.0.10 # MIT
+sqlalchemy-migrate==0.12.0
+django==2.1
+django-markdownx==2.0.28
