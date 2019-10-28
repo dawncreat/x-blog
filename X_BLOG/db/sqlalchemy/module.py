@@ -1,5 +1,6 @@
 from sqlalchemy import Column
 from sqlalchemy import DATE
+from sqlalchemy import DATETIME
 from sqlalchemy import Float
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
@@ -13,50 +14,57 @@ from sqlalchemy import Text
 
 metadata = MetaData()
 
-ArticleTypes = Table('article_types', metadata,
-                     Column('id', Integer(8), Sequence('article_type_id_seq'),
-                            primary_key=True),
-                     Column('name', String(16))
-                     )
 
-
-ArticleAndTypeRelations = \
-    Table('article_type_relations', metadata,
-          Column('id', Integer(8), Sequence('article_type_relation_seq_id'),
-                 primary_key=True),
-          Column('article_id', None, ForeignKey('articles.id')),
-          Column('article_type_id', None, ForeignKey('article_types.id')),
-          )
+ArticleTag = Table('articleTag', metadata,
+                   Column('tagID', String(32), primary_key=True),
+                   Column('tagName', String(32), nullable=False),
+                   Column('articleCounts', Integer, default=0),
+                   Column('tagHits', Integer, default=0),
+                   Column('createTime', DATETIME, nullable=False),
+                   Column('updateTime', DATETIME, nullable=False))
 
 
 # path: the storage path
 # statue: 0 is deleted, 1 is ok
-Articles = Table('articles', metadata,
-                 Column('id', String(30), Sequence('article_seq_id'),
-                        primary_key=True),
-                 Column('name', String),
-                 Column('path', String),
-                 Column('view_count', Integer),
-                 Column('create_date', DATE),
-                 Column('update_date', DATE),
-                 Column('statue', Integer),
-                 Colume('author', String)
-                 )
+Article = Table('article', metadata,
+                 Column('articleID', String(32), primary_key=True),
+                 Column('categories', String(64), nullable=False),
+                 Column('title', Text(1000), nullable=False),
+                 Column('filePath', String(255), nullable=False),
+                 Column('authorID', String(32), ForeignKey('user.uid')),
+                 Column('createTime', DATETIME, nullable=False),
+                 Column('updateTime', DATETIME, nullable=False),
+                 Column('contentType', String(32), nullable=False),
+                 Column('articleTagID', String(32), nullable=False),
+                 Column('hits', Integer, nullable=False),
+                 Column('statue', Integer, nullable=False),
+                 Column('allowedComment', Integer, nullable=False),
+                 Column('articleUrl', String(128), nullable=False))
 
 
 # statue: 0 no show, 1 will show
-Comments = Table('comments', metadata,
-                 Column('id', Integer, primary_key=True),
-                 Column('article_id', None, ForeignKey('articles.id')),
-                 Column('content', String),
-                 Column('status', Integer),
-                 Column('user_id', None, ForeignKey('users.id'))
-                 )
+Comment = Table('comment', metadata,
+                 Column('commentID', String(32), primary_key=True),
+                 Column('status', Integer, default=0),
+                 Column('authorID', None, ForeignKey('user.uid')),
+                 Column('createTime', DATETIME, nullable=False),
+                 Column('updateTime', DATETIME, nullable=False),
+                 Column('content', Text(1000), nullable=False))
 
 
-Users = Table('users', metadata,
-              Column('id', String, primary_key=True),
-              Column('user_name', String),
-              Column('email', String, nullable=False),
-              Column('password', String, nullable=False)
-              )
+User = Table('user', metadata,
+              Column('uid', String(32), primary_key=True),
+              Column('username', String(32), nullable=False),
+              Column('password', String(32), nullable=False),
+              Column('displayName', String(32), nullable=False),
+              Column('email', String(32), nullable=False),
+              Column('age', Integer, nullable=False),
+              Column('sex', Integer, nullable=False),
+              Column('hobbies', Text(1000), nullable=False),
+              Column('phone', String(32), nullable=False),
+              Column('groupName', String(32), nullable=False),
+              Column('createTime', DATETIME, nullable=False),
+              Column('updateTime', DATETIME, nullable=False),
+              Column('lastLoggedTime', DATETIME, nullable=False),
+              Column('status', Integer, nullable=False, default=1),
+              Column('articleCount', Integer, nullable=False, default=0))

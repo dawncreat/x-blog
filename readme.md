@@ -28,7 +28,23 @@ other useful staff.
 ## documents
 
 ## deploy
+### start a mysql container
+before that you should make docker enabled
+```shell
+docker run -p 3306:3306 --name X_Blog -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
 
+docker exec -u root -it X_Blog mysql -uroot -proot
+
+GRANT ALL ON *.* TO 'root'@'0.0.0.0';
+GRANT ALL ON *.* to 'root'@'%' IDENTIFIED BY 'root'; 
+
+mysql 8
+GRANT ALL PRIVILEGES on *.* to 'root'@'%';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
+
+
+FLUSH PRIVILEGES
+```
 ## contribute
 
 # Welcome
