@@ -27,7 +27,7 @@ ArticleTag = Table('articleTag', metadata,
 # path: the storage path
 # statue: 0 is deleted, 1 is ok
 Article = Table('article', metadata,
-                 Column('articleID', String(32), primary_key=True),
+                 Column('aID', String(32), primary_key=True),
                  Column('categories', String(64), nullable=False),
                  Column('title', Text(1000), nullable=False),
                  Column('filePath', String(255), nullable=False),
@@ -46,10 +46,11 @@ Article = Table('article', metadata,
 Comment = Table('comment', metadata,
                  Column('commentID', String(32), primary_key=True),
                  Column('status', Integer, default=0),
-                 Column('authorID', None, ForeignKey('user.uid')),
+                 Column('authorID', String(32), ForeignKey('user.uid')),
                  Column('createTime', DATETIME, nullable=False),
                  Column('updateTime', DATETIME, nullable=False),
-                 Column('content', Text(1000), nullable=False))
+                 Column('content', Text(1000), nullable=False),
+                 Column('articleID', String(32), ForeignKey('article.aID')))
 
 
 User = Table('user', metadata,
