@@ -1,6 +1,5 @@
 django==2.1
 django-markdownx==2.0.28
-pip install mysqlclient!=1.1.5,!=1.1.6,!=1.1.7,!=1.1.8,>=1.0.10 # MIT
+mysqlclient!=1.1.5,!=1.1.6,!=1.1.7,!=1.1.8,>=1.0.10 # MIT
 alembic==1.2.1
 tox>=2.7.0
-mysqlclient==1.4.4

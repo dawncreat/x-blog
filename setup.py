@@ -11,7 +11,7 @@ setuptools.setup(
     description="A blog web application package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/albertjone/X_BLOG",
+    url="https://github.com/albertjone/x-blog",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3.7",

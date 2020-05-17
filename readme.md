@@ -1,8 +1,8 @@
 # Description
 
-## what is X_BLOG
+## what is x-blog
 ----------
-X_BLOG is going to a be web application which not only support bloging but also
+x-blog is going to a be web application which not only support bloging but also
 other useful staff.
 
 ## feathures going to be obtained
@@ -31,12 +31,12 @@ other useful staff.
 ### start a mysql container
 before that you should make docker enabled
 ```shell
-docker run -p 3306:3306 --name X_Blog -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+docker run -p 3306:3306 --name x-blog -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
 
-docker exec -u root -it X_Blog mysql -uroot -proot
+docker exec -u root -it x-blog mysql -uroot -proot
 
 GRANT ALL ON *.* TO 'root'@'0.0.0.0';
-GRANT ALL ON *.* to 'root'@'%' IDENTIFIED BY 'root'; 
+GRANT ALL ON *.* to 'root'@'%' IDENTIFIED BY 'root';
 
 mysql 8
 GRANT ALL PRIVILEGES on *.* to 'root'@'%';

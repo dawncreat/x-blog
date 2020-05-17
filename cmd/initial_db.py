@@ -1,5 +1,5 @@
-from X_BLOG.db.sqlalchemy import get_engine
-from X_BLOG.db.sqlalchemy.module import metadata
+from x-blog.db.sqlalchemy import get_engine
+from x-blog.db.sqlalchemy.module import metadata
 
 
 def initial_db():
